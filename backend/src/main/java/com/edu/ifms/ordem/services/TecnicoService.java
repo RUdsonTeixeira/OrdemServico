@@ -1,11 +1,13 @@
 package com.edu.ifms.ordem.services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.edu.ifms.ordem.dto.TecnicoDTO;
 import com.edu.ifms.ordem.entities.Tecnico;
 import com.edu.ifms.ordem.repositories.TecnicoRepository;
 
@@ -13,9 +15,17 @@ import com.edu.ifms.ordem.repositories.TecnicoRepository;
 public class TecnicoService {
 	
 	@Autowired
+	
 	private TecnicoRepository repository;
 	@Transactional(readOnly = true)
-	public List<Tecnico> findAll(){
-		return repository.findAll();	
+	public List<TecnicoDTO> findAll(){
+		List<Tecnico> list = repository.findAll();
+//		List<TecnicoDTO> listDto = new ArrayList<>();
+		
+//		for(Tecnico t : list) {
+//			listDto.add(new TecnicoDTO(t));
+//		}
+//		return listDto;	
+		return list.stream().map(t -> new TecnicoDTO(t)).collect(Collectors.toList());
 	}
 }

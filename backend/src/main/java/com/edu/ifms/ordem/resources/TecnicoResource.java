@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.edu.ifms.ordem.entities.Tecnico;
+import com.edu.ifms.ordem.dto.TecnicoDTO;
 import com.edu.ifms.ordem.services.TecnicoService;
 
 @RestController
@@ -18,8 +18,8 @@ public class TecnicoResource {
 	private TecnicoService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Tecnico>> findAll(){
-		List<Tecnico> list = service.findAll();	
+	public ResponseEntity<List<TecnicoDTO>> findAll(){
+		List<TecnicoDTO> list = service.findAll();	
 		return ResponseEntity.ok().body(list);
 	}
 
