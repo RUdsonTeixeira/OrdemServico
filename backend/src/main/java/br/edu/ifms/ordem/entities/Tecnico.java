@@ -1,22 +1,17 @@
-package com.edu.ifms.ordem.entities;
+package br.edu.ifms.ordem.entities;
 
 import java.io.Serializable;
-import java.time.Instant;
-import java.util.List;
 import java.util.Objects;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
 import javax.persistence.Table;
+
 @Entity
 @Table(name = "tb_tecnico")
-public class Tecnico implements Serializable{
+public class Tecnico implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
 	@Id
@@ -26,15 +21,6 @@ public class Tecnico implements Serializable{
 	private String telefone;
 	private String email;
 	private String senha;
-	
-	@OneToMany(mappedBy = "tecnico")
-	private List<OrdemDeServico> ordemDeServicos;
-	
-	//Dados de auditoria
-	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	private Instant createdAt;
-	@Column(columnDefinition = "TIMESTAMP WITHOUT TIME ZONE")
-	private Instant updatedAt;
 	
 	public Tecnico() {
 		
@@ -88,32 +74,6 @@ public class Tecnico implements Serializable{
 		this.senha = senha;
 	}
 
-	
-	
-	public Instant getCreatedAt() {
-		return createdAt;
-	}
-
-	public Instant getUpdatedAt() {
-		return updatedAt;
-	}
-	
-	
-	
-	public List<OrdemDeServico> getOrdemDeServicos() {
-		return ordemDeServicos;
-	}
-
-	@PrePersist
-	public void prePersist() {
-		createdAt = Instant.now();
-	}
-	
-	@PreUpdate
-	public void preUpdate(){
-		updatedAt = Instant.now();
-	}
-
 	@Override
 	public int hashCode() {
 		return Objects.hash(id);
@@ -130,7 +90,5 @@ public class Tecnico implements Serializable{
 		Tecnico other = (Tecnico) obj;
 		return Objects.equals(id, other.id);
 	}
-	
-	
 	
 }
